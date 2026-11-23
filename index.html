@@ -15,12 +15,12 @@ body{background:var(--bg);color:var(--ink);font:400 16px/1.7 var(--sans);-webkit
 header{text-align:center;padding:64px 18px 28px}
 header .mono{color:var(--gold)}
 h1{font:500 clamp(2rem,4.6vw,3.3rem)/1.1 var(--ser);margin:16px 0 12px}
-header p{color:#cbd5e1;max-width:58ch;margin:0 auto}
+header p{color:#cbd5e1;max-width:58ch;margin:0 auto;text-wrap:balance}
 nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:12px 20px 30px;max-width:1100px;margin:auto}
 .pill{font:500 14px var(--sans);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 18px;cursor:pointer;transition:background .3s,border-color .3s,color .3s}
 .pill i{font:normal 500 11px var(--mono);color:var(--gold);margin-right:8px;transition:color .3s}
 .pill:hover{border-color:var(--gold);background:rgba(201,169,97,.08)}
-.pill.on{background:var(--gold);border-color:var(--gold);color:#0b0f19;font-weight:800;}.pill.on i{color:#14120D}
+.pill.on{background:var(--gold);border-color:var(--gold);color:#0b0f19;font-weight:600}.pill.on i{color:#14120D}
 .pill:focus-visible{outline:2px solid var(--butter);outline-offset:2px}
 .stage{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;max-width:1360px;margin:auto;padding:0 20px 24px}
 @media(max-width:960px){.stage{grid-template-columns:1fr}}
@@ -47,18 +47,21 @@ nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:12px 20p
 #content.out{opacity:0;transform:translateY(8px)}
 .panel .mono{color:var(--gold)}
 h2{font:500 clamp(1.7rem,3vw,2.2rem)/1.15 var(--ser);margin:10px 0 18px}
-.panel p{color:#D5CEBD;margin-bottom:14px;font-size:15px}
+.panel p{color:#D5CEBD;margin-bottom:14px;font-size:15px;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
+h2{text-wrap:balance}
 figure{margin:22px 0}
-.ph{border:none; solid var(--line);min-height:0px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;color:var(--mute);font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase}
-figure img{width:100%;display:block;border:none solid var(--line);padding:4px;backgriound:#0b0f17;filter:sepia(25%) contrast(105%);max-height:260px;object-fit:cover}
-figcaption{color:var(--mute);font-size:12px;margin-top:8px}
+.ph{border:none;min-height:0px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;color:var(--mute);font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+figure img{width:100%;display:block;border:none;padding:4px;background:#0b0f17;filter:sepia(25%) contrast(105%);max-height:260px;object-fit:cover}
+figcaption{color:var(--mute);font-size:12px;margin-top:8px;text-align:left}
 blockquote{border-left:2px solid var(--gold);padding:2px 0 2px 20px;margin:24px 0}
-blockquote q{display:block;font:italic 400 1.3rem/1.45 var(--ser);quotes:"„" "”"}
+blockquote q{display:block;text-align:left;text-wrap:pretty;font:italic 400 1.3rem/1.45 var(--ser);quotes:"„" "”"}
 blockquote cite{display:block;margin-top:10px;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-style:normal}
 h3{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid var(--line);padding-bottom:8px;margin:28px 0 4px}
-li{list-style:none;display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+ul{padding:0}
+li{list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
 li span:first-child{font-family:var(--ser);font-size:1.05rem}
-li span:last-child{color:var(--mute);text-align:right;font-size:13px}
+li span:first-child{text-align:left}
+li span:last-child{color:var(--mute);text-align:right;font-size:13px;flex-shrink:0;max-width:45%}
 .note{max-width:1360px;margin:0 auto;padding:0 20px 70px;color:var(--mute);font-size:12px}
 #nolib{display:none;padding:40px;text-align:center;color:var(--butter)}
 </style>
@@ -93,10 +96,10 @@ const PROV = {
   transilvania: [[48.0,22.9],[47.95,24.2],[47.5,25.3],[46.9,26.0],[46.2,26.7],[45.5,26.6],[45.4,25.7],[45.35,24.0],[45.2,22.7],[44.8,21.5],[45.3,20.6],[46.2,20.3],[46.9,21.7],[47.6,22.0]]
 };
 const CH = [
-{ id:'intro', n:'01', nav:'Ziua Națională', label:'1 Decembrie 1918', title:'Ziua Națională a României', pin:'alba', prov:['transilvania'], view:[[46.07,23.57],7],
-  text:['La 1 Decembrie 1918, la Alba Iulia, delegații aleși ai românilor din Transilvania, Banat, Crișana și Maramureș au votat unirea cu România.','Din 1990, 1 Decembrie este Ziua Națională. Harta urmărește drumul care a dus la această zi: Basarabia, Bucovina, apoi Transilvania.'],
-  quote:['…decretează unirea acestor Români și a tuturor teritoriilor locuite de dânșii cu România.','Rezoluția de la Alba Iulia, 1 decembrie 1918'],
-  docs:[['Rezoluția Adunării Naționale de la Alba Iulia','1 dec. 1918'],['Legea nr. 10/1990 (Ziua Națională)','1990']], cap:'Alba Iulia, 1 Decembrie 1918' },
+{ id:'intro', n:'01', nav:'Ziua Națională', label:'1\u00A0Decembrie 1918', title:'Ziua Națională a României', pin:'alba', prov:['transilvania'], view:[[46.07,23.57],7],
+  text:['La 1\u00A0Decembrie 1918, la Alba Iulia, delegații aleși ai românilor din Transilvania, Banat, Crișana și Maramureș au votat unirea cu România.','Din 1990, 1\u00A0Decembrie este Ziua Națională. Harta urmărește drumul care a dus la această zi: Basarabia, Bucovina, apoi Transilvania.'],
+  quote:['…decretează unirea acestor Români și a tuturor teritoriilor locuite de dânșii cu România.','Rezoluția de la Alba Iulia, 1\u00A0decembrie 1918'],
+  docs:[['Rezoluția Adunării Naționale de la Alba Iulia','1 dec. 1918'],['Legea nr. 10/1990 (Ziua Națională)','1990']], cap:'Alba Iulia, 1\u00A0Decembrie 1918' },
 { id:'context', n:'02', nav:'Context', label:'1916 – 1918', title:'Contextul: Marele Război și Iașii', pin:'iasi', prov:[], view:[[47.16,27.6],7],
   text:['România a intrat în război în 1916, iar după ocuparea Bucureștiului capitala a fost mutată la Iași. În 1917 armata a rezistat la Mărăști, Mărășești și Oituz.','Imperiile Rus și Austro-Ungar s-au destrămat spre sfârșitul războiului. Principiul autodeterminării a permis provinciilor cu populație românească să hotărască prin adunări reprezentative.'],
   quote:['Pe aici nu se trece!','Atribuit generalului Eremia Grigorescu, Mărășești, 1917'],
@@ -111,9 +114,9 @@ const CH = [
   quote:['Unirea necondiționată și pe vecie a Bucovinei, în vechile ei hotare, cu Regatul României.','Rezoluția Congresului General, 28 noiembrie 1918'],
   docs:[['Rezoluția Congresului General al Bucovinei','28 nov. 1918']],
   pers:[['Iancu Flondor','Președintele Congresului'],['Ion Nistor','Istoric și om politic']], cap:'Cernăuți, 1918' },
-{ id:'transilvania', n:'05', nav:'Transilvania', label:'1 decembrie 1918', title:'Transilvania: Marea Adunare de la Alba Iulia', pin:'alba', prov:['transilvania'], view:[[46.4,23.6],7],
+{ id:'transilvania', n:'05', nav:'Transilvania', label:'1\u00A0decembrie 1918', title:'Transilvania: Marea Adunare de la Alba Iulia', pin:'alba', prov:['transilvania'], view:[[46.4,23.6],7],
   text:['La Alba Iulia s-au întrunit 1228 de delegați aleși, în prezența a zeci de mii de oameni. Rezoluția Unirii a fost citită de Vasile Goldiș.','Adunarea a proclamat unirea cu România și a stabilit principii pentru guvernarea provinciei.'],
-  quote:['Adunarea Națională a tuturor Românilor din Transilvania, Banat și Țara Ungurească […] decretează unirea acestor Români și a tuturor teritoriilor locuite de dânșii cu România.','Rezoluția de la Alba Iulia, 1 decembrie 1918'],
+  quote:['Adunarea Națională a tuturor Românilor din Transilvania, Banat și Țara Ungurească […] decretează unirea acestor Români și a tuturor teritoriilor locuite de dânșii cu România.','Rezoluția de la Alba Iulia, 1\u00A0decembrie 1918'],
   docs:[['Rezoluția de la Alba Iulia','1 dec. 1918'],['Decretul regal de ratificare a Unirii Transilvaniei','11 dec. 1918']],
   pers:[['Vasile Goldiș','A citit Rezoluția Unirii'],['Gheorghe Pop de Băsești','Președintele Adunării'],['Iuliu Hossu','Episcop greco-catolic'],['Iuliu Maniu','Lider al Partidului Național Român']], cap:'Marea Adunare Națională, Alba Iulia' },
 { id:'incoronare', n:'06', nav:'Încoronarea', label:'15 octombrie 1922', title:'Încoronarea de la Alba Iulia', pin:'alba', prov:['basarabia','bucovina','transilvania'], view:[[46.07,23.57],8],
