@@ -1,4 +1,4 @@
-/* Harta Interactivă a Marii Uniri — logică (Vanilla JS) */
+
 const DATA = [
  {
   "id": "iasi",
